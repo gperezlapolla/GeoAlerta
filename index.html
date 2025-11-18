@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAlerta - Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>[ GEOALERTA ]</h1>
+        <p>Monitor de Eventos Naturales en Tiempo Real</p>
+    </header>
+
+    <nav>
+        <a href="#sismos">SISMOS (USGS)</a>
+        <a href="#tormentas">TORMENTAS (NASA)</a>
+        <a href="#asteroides">ASTEROIDES (NASA)</a>
+    </nav>
+
+    <main class="dashboard-container">
+
+        <section class="column" id="sismos">
+            <h2> Sismos (Magnitud > = 4.5+)</h2>
+            <div id="map"></div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Magnitud</th><th>Lugar</th><th>Hora (Local)</th></tr>
+                    </thead>
+                    <tbody id="data-output">
+                        <tr><td colspan="3">Cargando datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="column" id="tormentas">
+            <h2>Tormentas Severas (NASA)</h2>
+            <div id="map-storms"></div>
+            <div class="list-container" id="list-storms">
+                <p>Cargando datos de tormentas...</p>
+            </div>
+        </section>
+
+        <section class="column" id="asteroides">
+            <h2> Radar de Asteroides cercanos a la Tierra (NASA)</h2>
+            
+            <div id="radar-container">
+                <div id="radar-diagram">
+                    </div>
+                <div class="radar-legend">
+                    Distancia Luna-Tierra (1 LD): 384.400 km
+                </div>
+            </div>
+            
+            <div class="list-container" id="list-asteroids">
+                <p>Cargando datos de asteroides...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+    <script src="storms.js"></script>
+    <script src="asteroids.js"></script>
+</body>
+</html>

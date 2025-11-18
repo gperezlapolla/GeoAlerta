@@ -1,0 +1,290 @@
+/* --- CONFIGURACIÓN GLOBAL --- */
+* {
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- HEADER Y NAVEGACIÓN --- */
+header {
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+header h1 {
+    margin: 0;
+    color: #000;
+}
+nav {
+    text-align: center;
+    background-color: #333;
+    padding: 10px;
+}
+nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+/* --- ESTRUCTURA DEL DASHBOARD --- */
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.column {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    flex: 1 1 33.333%;
+    min-width: 300px;
+}
+.column h2 {
+    text-align: left;
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* --- RESPONSIVIDAD --- */
+@media (max-width: 992px) {
+    .column {
+        flex: 1 1 50%;
+    }
+}
+@media (max-width: 768px) {
+    .column {
+        flex: 1 1 100%;
+    }
+}
+
+/* --- ESTILOS PARA MÓDULO 1: SISMOS --- */
+#map {
+    height: 300px;
+    width: 100%;
+    margin: 0 0 20px 0;
+    border: 1px solid #999;
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #999;
+    margin: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #999;
+    padding: 10px;
+    text-align: left;
+    font-size: 0.8em;
+}
+th {
+    background-color: #ddd;
+    color: #000;
+}
+
+/* --- ESTILOS PARA MÓDULO 2: TORMENTAS --- */
+#map-storms {
+    height: 300px;
+    width: 100%;
+    margin: 0 0 20px 0;
+    border: 1px solid #999;
+}
+.list-container {
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #999;
+    padding: 10px;
+}
+.storm-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.storm-item h4 {
+    margin: 0 0 5px 0;
+    color: #c00;
+}
+.storm-item p {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+}
+.storm-item img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+/* --- ESTILOS PARA MÓDULO 3: RADAR DE ASTEROIDES (ACTUALIZADO) --- */
+
+#radar-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+#radar-diagram {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background-color: #222;
+    border: 1px solid #555;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.radar-point {
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.dot-earth-radar {
+    top: 50%;
+    left: 50%;
+    width: 12px; 
+    height: 12px;
+    background-color: #4D9DE0;
+    border: 1px solid #E0FBFC;
+    z-index: 10;
+}
+.label-earth, .label-moon {
+    position: absolute;
+    font-size: 0.7em;
+    color: #ccc;
+    white-space: nowrap;
+    z-index: 11;
+}
+.label-earth {
+    top: calc(50% + 10px); /* Debajo de la Tierra */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.dot-moon-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* El ancho y alto se ponen con JS */
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.dot-moon-radar {
+    /* Top y Left se ponen con JS */
+    width: 8px;
+    height: 8px;
+    background-color: #ddf127;
+    border: 1px solid #999;
+    z-index: 9;
+}
+
+.label-moon {
+    /* Top y Left se ponen con JS */
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+.dot-asteroid-radar {
+    width: 8px;
+    height: 8px;
+    background-color: #E0FBFC;
+    z-index: 5;
+}
+.dot-hazardous-radar {
+    background-color: #E20000;
+    border: 1px solid #FF8989;
+    box-shadow: 0 0 8px #E20000;
+    z-index: 6;
+}
+.radar-legend {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* --- NUEVA FLECHA DE RADIO (DESDE EL BORDE HASTA LA TIERRA) --- */
+.arrow-radius-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 50%; /* Línea desde el borde (0%) hasta el centro (50%) */
+    background-color: #888;
+    z-index: 11;
+}
+/* Punta de flecha superior (en el borde) */
+.arrow-radius-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 5px solid #888; /* Triángulo apuntando hacia arriba */
+}
+/* Punta de flecha inferior (en la Tierra) */
+.arrow-radius-line::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Justo en el centro (50%) */
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #888; /* Triángulo apuntando hacia abajo */
+}
+/* Etiqueta que "rompe" la línea */
+.arrow-radius-label {
+    position: absolute;
+    top: 25%; /* A mitad de camino de la línea (0 a 50) */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12; /* Sobre la línea */
+    background: #222; /* Fondo para "romper" la línea */
+    color: #ccc;
+    font-size: 0.7em;
+    padding: 0 3px;
+    white-space: nowrap;
+}
+
+
+/* --- Estilos para la lista de texto (Módulo 3) --- */
+.asteroid-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.asteroid-item h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+.asteroid-item p {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+}
+.asteroid-item.hazardous h4 {
+    color: #c00;
+    font-weight: bold;
+}
+.asteroid-item.hazardous {
+    border-left: 3px solid #c00;
+    padding-left: 10px;
+}
